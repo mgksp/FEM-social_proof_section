@@ -1,0 +1,233 @@
+@use "reset";
+@use "colors" as *;
+@use "breakpoints" as *;
+
+body {
+  font-size: 1.5rem;
+  min-height: 100vh;
+  font-family: "Spartan", sans-serif;
+  background-image: url("../images/bg-pattern-top-mobile.svg"),
+    url("../images/bg-pattern-bottom-mobile.svg");
+  background-repeat: no-repeat, no-repeat;
+  background-position: left top, right bottom;
+
+  @include breakpoint(medium) {
+    background-image: url("../images/bg-pattern-top-desktop.svg"),
+      url("../images/bg-pattern-bottom-desktop.svg");
+  }
+  display: grid;
+  place-content: center;
+}
+
+.container {
+  margin: 8rem 2rem 2rem 2rem;
+  display: grid;
+  gap: 2.8rem;
+  grid-template-areas: "main" "ratings" "testimonials";
+
+  @include breakpoint(medium) {
+    margin: 0 4rem;
+    grid-template-areas: "main ratings" "testimonials testimonials";
+    grid-template-columns: 2fr 3fr;
+    grid-template-rows: max-content max-content;
+  }
+
+  @include breakpoint(large) {
+    margin: 0 auto;
+    width: 83%;
+    gap: 5rem;
+  }
+
+  @include breakpoint(x-large) {
+    grid-template-columns: 1fr 1fr;
+    gap: 10rem;
+  }
+
+  @include breakpoint(xx-large) {
+    width: 1280px;
+  }
+}
+
+.main {
+  grid-area: main;
+  text-align: center;
+
+  @include breakpoint(medium) {
+    text-align: left;
+  }
+
+  &__title {
+    color: $dk-magenta;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 1.8rem;
+
+    @include breakpoint(medium) {
+      font-size: 4vw;
+      margin-bottom: 3.2rem;
+    }
+
+    @include breakpoint(xx-large) {
+      font-size: 6rem;
+    }
+  }
+
+  &__description {
+    color: $dk-grayish-magenta;
+    line-height: 1.5;
+
+    @include breakpoint(large) {
+      width: 38ch;
+    }
+  }
+}
+
+.ratings {
+  grid-area: ratings;
+  display: grid;
+  gap: 1.4rem;
+  grid-template-rows: min-content min-content min-content;
+  align-content: center;
+
+  &__card {
+    background-color: $lt-grayish-magenta;
+    border-radius: 1rem;
+    padding: 1.6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    height: fit-content;
+
+    @include breakpoint(medium) {
+      &:nth-child(1) {
+        margin-right: 10%;
+      }
+      &:nth-child(2) {
+        margin-left: 5%;
+        margin-right: 5%;
+      }
+      &:nth-child(3) {
+        margin-left: 10%;
+      }
+    }
+
+    @include breakpoint(large) {
+      flex-direction: row;
+      justify-content: space-evenly;
+
+      &:nth-child(1) {
+        margin-right: 18%;
+      }
+      &:nth-child(2) {
+        margin-left: 9%;
+        margin-right: 9%;
+      }
+      &:nth-child(3) {
+        margin-left: 18%;
+      }
+    }
+
+    &__stars {
+      display: flex;
+      gap: 1rem;
+    }
+
+    &__title {
+      color: $dk-magenta;
+      font-weight: 700;
+    }
+  }
+}
+
+.testimonials {
+  grid-area: testimonials;
+  display: grid;
+  gap: 1.4rem;
+
+  @include breakpoint(medium) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  @include breakpoint(large) {
+    gap: 2.8rem;
+  }
+
+  &__card {
+    background-color: $dk-magenta;
+    color: $white;
+    border-radius: 1rem;
+    padding: 3.6rem 2.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    @include breakpoint(medium) {
+      &:nth-child(1) {
+        margin-bottom: 4rem;
+      }
+      &:nth-child(2) {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+      }
+      &:nth-child(3) {
+        margin-top: 4rem;
+      }
+    }
+
+    @include breakpoint(large) {
+      padding: 4.2rem 3.2rem;
+    }
+
+    &__customer {
+      display: grid;
+      align-items: center;
+      grid-template-columns: min-content 1fr;
+      grid-template-areas:
+        "img name"
+        "img verified";
+
+      &__img {
+        grid-area: img;
+        width: 5rem;
+        height: 5rem;
+        border-radius: 50%;
+        margin-right: 2rem;
+      }
+
+      &__name {
+        grid-area: name;
+        font-weight: 500;
+      }
+
+      &__verified {
+        grid-area: verified;
+        font-size: 1.4rem;
+        color: $soft-pink;
+      }
+    }
+
+    &__quote {
+      line-height: 1.5;
+      font-size: 1.4rem;
+    }
+  }
+}
+
+.attribution {
+  font-size: 11px;
+  text-align: center;
+  margin-bottom: 1rem;
+
+  @include breakpoint(medium) {
+    width: calc(100vw - 10rem);
+    position: absolute;
+    bottom: 1rem;
+    margin: 0;
+  }
+
+  a {
+    color: hsl(228, 45%, 44%);
+  }
+}
